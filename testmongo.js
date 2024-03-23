@@ -16,7 +16,7 @@ const uri ='mongodb+srv://ae:cs5UYjwsPfdQPnRd@cluster0.lrsulsa.mongodb.net/MyDBe
 
 const client = new MongoClient(uri);
 
-// Default endpoint
+
 app.get('/', (req, res) => {
     if (req.cookies.auth) {
         res.send(`Authentication cookie exists with value: ${req.cookies.auth}<br><a href="/cookies">View Cookies</a> | <a href="/clear-cookie">Clear Cookie</a>`);
@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
     }
 });
 
-// Login endpoint
+
 app.get('/login', (req, res) => {
     res.send('<form method="post" action="/login">\
                 <input type="text" name="user_ID" placeholder="User ID"><br>\
@@ -47,7 +47,7 @@ app.post('/login', async (req, res) => {
     }
 });
 
-// Register endpoint
+
 app.get('/register', (req, res) => {
     res.send('<form method="post" action="/register">\
                 <input type="text" name="user_ID" placeholder="User ID"><br>\
@@ -64,13 +64,13 @@ app.post('/register', async (req, res) => {
     res.send('User register was successful. <a href="/">Go back to homepage</a>');
 });
 
-// View Cookies endpoint
+
 app.get('/cookies', (req, res) => {
     res.send(`All active cookies: ${JSON.stringify(req.cookies)}<br><a href="/">Back to homepage</a>`);
 });
 
-// Clear Cookie endpoint
+
 app.get('/clear-cookie', (req, res) => {
     res.clearCookie('auth');
-    res.send('All cookie cleared successfully. <a href="/">Go back to homepage</a>');
+    res.send('All cookies cleared successfully. <a href="/">Go back to homepage</a>');
 });
