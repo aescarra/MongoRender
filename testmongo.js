@@ -21,7 +21,7 @@ app.get('/', (req, res) => {
     if (req.cookies.auth) {
         res.send(`Authentication cookie exists with value: ${req.cookies.auth}<br><a href="/cookies">View Cookies</a> | <a href="/clear-cookie">Clear Cookie</a>`);
     } else {
-        res.send('<a href="/login">Login</a> | <a href="/register">Register</a>');
+        res.send('<a href="/login">Click Login</a> | <a href="/register">Click Register</a>');
     }
 });
 
@@ -43,7 +43,7 @@ app.post('/login', async (req, res) => {
         res.cookie('auth', 'authenticated', { maxAge: 60000 });
         res.redirect('/');
     } else {
-        res.send('Invalid user credentials. <a href="/">Go back to homepage</a>');
+        res.send('User credntials are invalid. <a href="/">Back to homepage</a>');
     }
 });
 
@@ -61,16 +61,16 @@ app.post('/register', async (req, res) => {
     const database = client.db('MyDBexample');
     const users = database.collection('Users');
     await users.insertOne({ user_ID, password });
-    res.send('User registered successfully. <a href="/">Go back to homepage</a>');
+    res.send('User register was successful. <a href="/">Go back to homepage</a>');
 });
 
 // View Cookies endpoint
 app.get('/cookies', (req, res) => {
-    res.send(`Active cookies: ${JSON.stringify(req.cookies)}<br><a href="/">Go back to homepage</a>`);
+    res.send(`All active cookies: ${JSON.stringify(req.cookies)}<br><a href="/">Back to homepage</a>`);
 });
 
 // Clear Cookie endpoint
 app.get('/clear-cookie', (req, res) => {
     res.clearCookie('auth');
-    res.send('Cookie cleared successfully. <a href="/">Go back to homepage</a>');
+    res.send('All cookie cleared successfully. <a href="/">Go back to homepage</a>');
 });
